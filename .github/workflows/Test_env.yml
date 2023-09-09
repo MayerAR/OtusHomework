@@ -19,7 +19,7 @@ jobs:
           cd ${{ env.work_path }}
           mkdir ${{ env.work_dir }}
           cd ${{ env.work_dir }}
-          touch ${{ env.project_files1 }}
+          touch ${{ env.project_files_1 }}
           ls -la
   create_files_on_VM2:
     runs-on: ubuntu-latest
