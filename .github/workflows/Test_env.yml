@@ -2,7 +2,7 @@
 name: Test Env
 on: workflow_dispatch
 
-var:
+env:
   work_path: ./project
   work_dir: ./Test_Env
   project_files_1: main.cpp test.h readme.txt
@@ -15,20 +15,20 @@ jobs:
     steps:
       - name: Copy project_files_1 on VM1
         run: |
-          mkdir ${{ var.work_path }}
-          cd ${{ var.work_path }}
-          mkdir ${{ var.work_dir }}
-          cd ${{ var.work_dir }}
-          touch ${{ var.project_files_1 }}
+          mkdir ${{ env.work_path }}
+          cd ${{ env.work_path }}
+          mkdir ${{ env.work_dir }}
+          cd ${{ env.work_dir }}
+          touch ${{ env.project_files_1 }}
           ls -la
   create_files_on_VM2:
     runs-on: ubuntu-latest
     steps:
       - name: Create project_files_2 on VM2
         run: |
-          mkdir ${{ var.work_path }}
-          cd ${{ var.work_path }}
-          mkdir ${{ var.work_dir }}
-          cd ${{ var.work_dir }}
-          touch ${{ var.project_files_2 }}
+          mkdir ${{ env.work_path }}
+          cd ${{ env.work_path }}
+          mkdir ${{ env.work_dir }}
+          cd ${{ env.work_dir }}
+          touch ${{ env.project_files_2 }}
           ls -la
