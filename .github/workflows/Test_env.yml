@@ -2,33 +2,13 @@
 name: Test Env
 on: workflow_dispatch
 
-env:
-  work_path: ./project
-  work_dir: ./Test_Env
-  project_files_1: main.cpp test.h readme.txt
-  project_files_2: Hello.cpp World.h strangeFormat.jjt
-
-
 jobs:
   create_files_on_VM1:
     runs-on: ubuntu-latest
     steps:
-      - name: Copy project_files_1 on VM1
-        run: |
-          mkdir ${{ env.work_path }}
-          cd ${{ env.work_path }}
-          mkdir ${{ env.work_dir }}
-          cd ${{ env.work_dir }}
-          touch ${{ env.project_files_1 }}
-          ls -la
-  create_files_on_VM2:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Create project_files_2 on VM2
-        run: |
-          mkdir ${{ env.work_path }}
-          cd ${{ env.work_path }}
-          mkdir ${{ env.work_dir }}
-          cd ${{ env.work_dir }}
-          touch ${{ env.project_files_2 }}
-          ls -la
+      - name: Find host address
+        run: echo "SERVER_IP='$(hostname -I | awk '{print $1}')''" >> $GITHUB_ENV
+      - name: Print host address
+        run: | 
+          echo "IP style 1 -- ${{env.SERVER_IP}}"
+          echo "IP style 2 -- $SERVER_IP"
