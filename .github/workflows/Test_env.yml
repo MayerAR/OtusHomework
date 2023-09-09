@@ -4,7 +4,7 @@ on: workflow_dispatch
 
 env:
   work_path: ./project
-  work_dir: ./Test Env
+  work_dir: ./Test_Env
   project_files_1: main.cpp test.h readme.txt
   project_files_2: Hello.cpp World.h strangeFormat.jjt
 
