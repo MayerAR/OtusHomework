@@ -14,7 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create Artefact
-        run: echo "Hello, World? This is artifact body!" > ${{env.artifact_path}}${{env.artifact_filename}}
+        run: |
+          mkdir ${{env.artifact_path}}
+          echo "Hello, World? This is artifact body!" > ${{env.artifact_path}}${{env.artifact_filename}}
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
