@@ -3,6 +3,7 @@
 #include <set>
 #include <fstream>
 #include <algorithm>
+#include <iterator>
 #include "ip_address.h"
 
 int main (int, char **) 
