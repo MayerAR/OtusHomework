@@ -1,4 +1,5 @@
 #include "ip_address.h"
+#include <cstring>
 
 namespace ip4
 {
