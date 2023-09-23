@@ -8,7 +8,7 @@
 
 int main (int, char **) 
 {
-    std::set<ip4::StdAddress, std::greater<ip4::StdAddress>> addresses;
+    std::multiset<ip4::StdAddress, std::greater<ip4::StdAddress>> addresses;
    
     std::istream& in = std::cin;
     while (in)
