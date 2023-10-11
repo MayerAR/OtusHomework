@@ -2,27 +2,25 @@
 #include <vector>
 #include <list>
 #include <map>
+#include <ranges>
+#include <algorithm>
+#include <numeric>
 #include "allocator.h"
 
-template <typename T>
-using allocator = my_allocator::stack::allocator<T>;
+using allocator = my_allocator::heap::allocator<std::pair<const int, int>>;
 
-int main (int, char **) {
+int main (int, char **) 
+{
+    allocator alloc(10);
+    std::map<int, int, std::less<int>, allocator> m1(alloc);
+    m1[0] = 1;
+    for (int i = 1; i < 9; ++i)
+    {
+        m1[i] = i * m1[i - 1];
+    }
 
-    std::cout << "hello world\n";
-    std::vector<int, allocator<int>> v = { 1, 2 ,3 };
-    v.push_back(100);
-    v.push_back(300);
-    for (int value : v)
-        std::cout << value << ' ';
-
-    //std::map<const int, int, std::less<int>, allocator<std::pair<int, int>>> m;
-    //m[40] = 40;
-    //m[20] = 20;
-    //m[10] = 10;
-    //
-    //for (auto& [key, value] : m)
-    //    std::cout << key << ' ' << value << ' ';
+    for (auto& [key, value] : m1)
+        std::cout << key << ' ' << value << '\n';
 
     std::cin.get();
     return 0;
