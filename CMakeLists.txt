@@ -4,9 +4,9 @@ set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
 set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 set(Boost_DEBUG ON)
 
-project(allocator VERSION ${PROJECT_VESRION})
+project(tasks VERSION ${PROJECT_VESRION})
 
-add_executable(allocator main.cpp allocator.h )
+add_executable(tasks main.cpp)
 
 set_target_properties(allocator PROPERTIES
     CXX_STANDARD 20
@@ -14,18 +14,18 @@ set_target_properties(allocator PROPERTIES
 )
 
 if (MSVC)
-    target_compile_options(allocator PRIVATE
+    target_compile_options(tasks PRIVATE
         /W4
     )
 else ()
-    target_compile_options(allocator PRIVATE
+    target_compile_options(tasks PRIVATE
         -Wall -Wextra -pedantic -Werror
     )
 endif()
 
 
 
-install(TARGETS allocator RUNTIME DESTINATION bin)
+install(TARGETS tasks RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 
