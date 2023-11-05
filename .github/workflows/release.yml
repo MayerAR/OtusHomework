@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - feature/github_actions
-      - 04_homework_SFINAE
+      - 04_homework_print_ip
   workflow_dispatch:
 
 jobs:
