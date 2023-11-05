@@ -2,30 +2,29 @@ cmake_minimum_required(VERSION 3.10)
 
 set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
 set(PROJECT_VESRION 0.0.${PATCH_VERSION})
-set(Boost_DEBUG ON)
 
-project(tasks VERSION ${PROJECT_VESRION})
+project(print_ip VERSION ${PROJECT_VESRION})
 
-add_executable(tasks main.cpp)
+add_executable(print_ip main.cpp)
 
-set_target_properties(allocator PROPERTIES
+set_target_properties(sfinae PROPERTIES
     CXX_STANDARD 20
     CXX_STANDARD_REQUIRED ON
 )
 
 if (MSVC)
-    target_compile_options(tasks PRIVATE
+    target_compile_options(print_ip PRIVATE
         /W4
     )
 else ()
-    target_compile_options(tasks PRIVATE
+    target_compile_options(print_ip PRIVATE
         -Wall -Wextra -pedantic -Werror
     )
 endif()
 
 
 
-install(TARGETS tasks RUNTIME DESTINATION bin)
+install(TARGETS print_ip RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 
