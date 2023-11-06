@@ -3,7 +3,7 @@ name: 'C++ CI'
 on:
   push:
     branches:
-      - main
+      - test_doxygen
       - feature/github_actions
   workflow_dispatch:
 
@@ -15,11 +15,21 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: true
-      - run: sudo apt-get update && sudo apt-get install cmake libboost-test-dev -y
+      - run: sudo apt-get update
       - run: cmake . -DPATCH_VERSION=${{ github.run_number }}
       - run: cmake --build .
-      - run: cmake --build . --target test
       - run: cmake --build . --target package
+      - name: Doxygen Action C++
+        uses: mattnotmitt/doxygen-action@v1.3.1
+        with:
+            working-directory: '.'
+            doxyfile-path: 'doc/doxygen/DoxyfileCC'
+      - name: Upload Output Directory
+        uses: actions/upload-artifact@v3
+        with:
+            name: doc-files
+            path: doc
+            retention-days: 1
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -40,3 +50,23 @@ jobs:
           asset_path: ./helloworld-0.0.${{ github.run_number }}-Linux.deb
           asset_name: helloworld-0.0.${{ github.run_number }}-Linux.deb
           asset_content_type: application/vnd.debian.binary-package
+  copy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps: 
+      - uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+      - name: DOwnload Output Directory
+        uses: actions/download-artifact@v3
+        with:
+          name: doc-files
+          path: docDir
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          message: 'Update docs'
+          branch: gh-pages
+          add: '["docDir/doxygen/CC/html", "docDir/users_guide/Users_Guide.pdf"]'
+
