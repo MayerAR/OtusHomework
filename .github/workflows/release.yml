@@ -20,7 +20,7 @@ jobs:
       - run: cmake --build .
       - run: cmake --build . --target package
       - name: Doxygen Action C++
-        uses: mattnotmitt/doxygen-action@v1.3.1
+        uses: mattnotmitt/doxygen-action@v1.9.5
         with:
             working-directory: '.'
             doxyfile-path: 'doc/doxygen/DoxyfileCC'
